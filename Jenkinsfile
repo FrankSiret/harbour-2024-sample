@@ -19,7 +19,7 @@ pipeline {
                 sh 'echo "Deploying..."'
 
                 // withCredentials([sshUserPrivateKey(credentialsId: 'mykey', keyFileVariable: 'mykey', usernameVariable: 'myuser')]) {
-                //     sh 'ls -la'
+                    sh 'ls -la'
                 //     sh "echo 'mykey=${mykey}'"
 
                 //     // sh 'chmod 600 ./mykey'
