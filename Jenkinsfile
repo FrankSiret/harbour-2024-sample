@@ -20,8 +20,8 @@ pipeline {
 
                 withCredentials([sshUserPrivateKey(credentialsId: 'mykey', keyFileVariable: 'mykey', usernameVariable: 'myuser')]) {
                     sh 'ls -la'
-                    sh "echo 'mykey=${mykey}'"
-                    sh "echo 'myuser=${myuser}'"
+                    // sh "echo 'mykey=${mykey}'"
+                    // sh "echo 'myuser=${myuser}'"
                     // sh 'chmod 600 ./mykey'
                     sh "scp -o StrictHostKeychecking=no -i ${mykey} main ${myuser}@192.168.105.3:"
                 }
