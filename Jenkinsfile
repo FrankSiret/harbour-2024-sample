@@ -18,13 +18,13 @@ pipeline {
             steps {
                 sh 'echo "Deploying..."'
 
-                withCredentials([sshUserPrivateKey(credentialsId: 'mykey2', keyFileVariable: 'mykey', usernameVariable: 'myuser')]) {
+                withCredentials([sshUserPrivateKey(credentialsId: 'mykey', keyFileVariable: 'mykey', usernameVariable: 'myuser')]) {
                     sh 'ls -la'
                     // sh "echo -n '${mykey}' > ./mykey"
 
                     // sh 'chmod 600 ./mykey'
 
-                    sh "scp -o StrictHostKeychecking=no -i ${mykey} main maksymprokopov@192.168.105.3:"
+                    sh "scp -o StrictHostKeychecking=no -i ${mykey} main vagrant@192.168.105.3:"
 
                 }
             }
