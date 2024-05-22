@@ -23,7 +23,7 @@ pipeline {
                     // sh "echo 'mykey=${mykey}'"
                     // sh "echo 'myuser=${myuser}'"
                     // sh 'chmod 600 ./mykey'
-                    sh "scp -o StrictHostKeychecking=no -i ${mykey} main ${myuser}@192.168.105.3:"
+                    sh 'scp -o StrictHostKeychecking=no -i $mykey main $myuser@192.168.105.3:'
                 }
             }
         }
