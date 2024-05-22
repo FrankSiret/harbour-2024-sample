@@ -16,7 +16,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh 'echo "Deploying!!..."'
+                sh 'echo "Deploying..."'
 
                 withCredentials([sshUserPrivateKey(credentialsId: 'mykey', keyFileVariable: 'mykey', usernameVariable: 'myuser')]) {
                     sh 'ls -la'
