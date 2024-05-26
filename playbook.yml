@@ -17,7 +17,7 @@
       src: main
       dest: /home/vagrant/main
 
-    - name: "Make artifact executable"
+  - name: "Make artifact executable"
     file:
       path: /home/vagrant/main
       mode: "u+x"
