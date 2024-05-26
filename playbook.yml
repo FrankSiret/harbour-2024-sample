@@ -1,37 +1,37 @@
 hosts: app
-  tasks:
+tasks:
 
-  - name: "Check service"
-    shell: "if test -f /etc/systemd/system/myapp.service ; then echo true; else echo false; fi"
-    register: service_exists
+- name: "Check service"
+  shell: "if test -f /etc/systemd/system/myapp.service ; then echo true; else echo false; fi"
+  register: service_exists
 
-  - name: "Stop service"
-    ansible.builtin.systemd:
-      name: myapp
-      state: stopped
-    when: service_exists.stdout == "true"
-    become: true
+- name: "Stop service"
+  ansible.builtin.systemd:
+    name: myapp
+    state: stopped
+  when: service_exists.stdout == "true"
+  become: true
 
-  - name: "Copy binary artifact"
-    copy:
-      src: main
-      dest: /home/vagrant/main
+- name: "Copy binary artifact"
+  copy:
+    src: main
+    dest: /home/vagrant/main
 
-   - name: "Make artifact executable"
-    file:
-      path: /home/vagrant/main
-      mode: "u+x"
-    become: true
+  - name: "Make artifact executable"
+  file:
+    path: /home/vagrant/main
+    mode: "u+x"
+  become: true
 
-  - name: "Copy service"
-    copy:
-      src: myapp.service
-      dest: /etc/systemd/system/myapp.service
-    become: true
+- name: "Copy service"
+  copy:
+    src: myapp.service
+    dest: /etc/systemd/system/myapp.service
+  become: true
 
-  - name: "Start service"
-    ansible.builtin.systemd:
-      name: myapp
-      enabled: yes
-      state: started
-    become: true
+- name: "Start service"
+  ansible.builtin.systemd:
+    name: myapp
+    enabled: yes
+    state: started
+  become: true
