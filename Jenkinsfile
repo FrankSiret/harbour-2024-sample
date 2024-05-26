@@ -24,5 +24,17 @@ pipeline {
                 }
             }
         }
+
+        stage('Run service') {
+            steps {
+                sh 'echo "Running service..."'
+
+                withCredentials([sshUserPrivateKey(credentialsId: 'mykey', keyFileVariable: 'mykey', usernameVariable: 'myuser')]) {
+                    sh "scp -o StrictHostKeychecking=no -i ${mykey} myapp.service ${myuser}@192.168.105.3:"
+
+                    sh "ssh -i ${mykey} ${myuser}@192.168.105.3 \"sudo mv myapp.service /etc/systemd/system/\""
+                }
+            }
+        }
     }
 }
