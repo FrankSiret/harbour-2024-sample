@@ -1,0 +1,26 @@
+hosts: app
+  tasks:
+
+  - name: "Stop service"
+    ansible.builtin.systemd:
+      name: myapp
+      state: stopped
+    become: true
+
+  - name: "Copy binary artifact"
+    copy:
+      src: main
+      dest: /home/vagrant/main
+
+  - name: "Copy service"
+    copy:
+      src: myapp.service
+      dest: /etc/systemd/system/myapp.service
+    become: true
+
+  - name: "Start service"
+    ansible.builtin.systemd:
+      name: myapp
+      enabled: yes
+      state: started
+    become: true
